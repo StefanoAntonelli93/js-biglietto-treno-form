@@ -1,24 +1,120 @@
 'use strict'
 
-console.log('questa console è visualizzata');
+console.log('tutto ok');
 
-// Ciao ragazzi,
-// esercizio di oggi: calcolo del prezzo del biglietto del treno
-// Cartella / Repo: js-biglietto-treno-formDescrizione:
-// Scrivere un programma che chieda all’utente:
 
-//     Il numero di chilometri da percorrere
-//     Età del passeggero
+// console.log(ticketResult);
 
-// Sulla base di queste informazioni dovrà calcolare il prezzo totale del biglietto di viaggio, secondo le seguenti regole:
+// button
+const buttonGenera = document.getElementById('genera-ticket');
+const buttonAnnulla = document.getElementById('annulla-ticket');
 
-//     il prezzo del biglietto è definito in base ai km (0.21 € al km)
-//     va applicato uno sconto del 20% per i minorenni
-//     va applicato uno sconto del 40% per gli over 65.
+console.dir(buttonGenera);
+console.dir(buttonAnnulla);
 
-// MILESTONE 1:
-// Iniziamo implementando il programma senza alcuna estetica: usando esclusivamente due input e un bottone (non stilizzati), realizziamo le specifiche scritte sopra. La risposta finale (o output) sarà anch’essa da scrivere in console.
-// MILESTONE 2:
-// Solo una volta che il milestone 1 sarà completo e funzionante allora realizzeremo un form in pagina in cui l’utente potrà inserire i dati e visualizzare il calcolo finale con il prezzo, come da screenshot allegato. Il recap dei dati e l’output del prezzo finale, andranno quindi stampati in pagina (il prezzo dovrà essere formattato con massimo due decimali, per indicare i centesimi sul prezzo).
-// Nota:
-// Se non vi sentite particolarmente creativi, questa potrebbe essere un’implementazione da seguire per il secondo milestone. Potete scegliere di implementare una soluzione completamente diversa oppure simile, ma in ogni caso cercate di farla vostra.Ricordate: il primo push dovrà essere un file README.md contenente la risoluzione dell’esercizio in linguaggio naturale!Buon lavoro!
+
+//event listener
+buttonGenera.addEventListener('click' , function () {
+    console.log('ho cliccato su bottone genera');
+    // element
+    const ticketResult = document.getElementById('ticket-result');
+    const carNumber =  Math.floor(Math.random() * 30) + 1;
+    const codeNumber =  Math.floor(Math.random() * 90000000) + 10000000;
+    // console.log(carNumber);
+// input utente
+    const usernameInput = document.getElementById('username-input');
+    const kmInput = document.getElementById('km-input');
+    const ageInput = document.getElementById('age-input');
+
+    console.log(usernameInput.value);
+    console.log(kmInput.value);
+    console.log(ageInput.value);
+
+    // console.log({ ageInput });
+
+    
+// output biglietto
+    const usernameOutput = document.getElementById('username-output');
+    const offerOutput = document.getElementById('offer-output');
+    const carOutput = document.getElementById('car-output');
+    const codeOutput = document.getElementById('code-output');
+    const priceOutput = document.getElementById('price-output');
+
+    console.dir(usernameOutput);
+    console.dir(offerOutput);
+    console.dir(carOutput);
+    console.dir(codeOutput);
+    console.dir(priceOutput);
+
+// calcoli per prezzo biglietto
+
+    const rate = 0.21;
+    const discountUnder = 20;
+    const discountOver = 40;
+    let price = Number(kmInput.value * rate);
+    let offerDescription ='Offerta standard';
+
+    // console.log({ price });
+   
+// if
+
+if (ageInput.value === 'under') {
+    console.log('minorenne');
+    price = Number(price - (price * discountUnder) / 100);
+    offerDescription = 'Offerta under-18';
+    // console.log(price);
+} else if (ageInput.value === 'over') {
+    console.log('over-65');
+    price = Number(price - (price * discountOver) / 100);
+    offerDescription =' Offerta Over-65';
+    // console.log(price);
+}
+1
+console.log(`${price.toFixed(2)} €`);
+
+
+// mostrare ticket result
+
+ticketResult.classList.remove('d-none');
+
+//riempire campi biglietto
+
+usernameOutput.innerText = usernameInput.value;
+offerOutput.innerText = offerDescription;
+priceOutput.innerText = `${price.toFixed(2)} €`;
+carOutput.innerText = carNumber;
+codeOutput.innerText = codeNumber;
+}
+)
+
+
+
+
+
+buttonAnnulla.addEventListener('click' , function () {
+    console.log('ho cliccato su bottone annulla');
+    // element
+    const ticketResult = document.getElementById('ticket-result');
+
+    //nascondere ticket result
+
+    ticketResult.classList.add('d-none');
+
+    const usernameInput = document.getElementById('username-input');
+    const kmInput = document.getElementById('km-input');
+    const ageInput = document.getElementById('age-input');
+
+    usernameInput.value = '';
+    kmInput.value = '';
+    ageInput.value = 'seleziona eta';
+
+}
+)
+
+
+
+
+
+
+
+
